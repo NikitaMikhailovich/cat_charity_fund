@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, Boolean, DateTime
 from datetime import datetime
+
+from sqlalchemy import Boolean, Column, DateTime, Integer
 
 # Импортируем базовый класс для моделей.
 from app.core.db import Base

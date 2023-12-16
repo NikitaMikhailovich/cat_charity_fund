@@ -3,10 +3,9 @@ from typing import List, Union
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.sql.expression import false
 
 from app.models import CharityProject, Donation
-
-from sqlalchemy.sql.expression import false
 
 
 async def donation_process(

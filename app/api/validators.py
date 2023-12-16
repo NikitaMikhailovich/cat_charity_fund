@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.charity_project import charity_crud
 from app.models import CharityProject
+
 # from app.crud.reservation import reservation_crud
 
 
@@ -43,7 +44,6 @@ async def check_charity_closed_before_update(
             status_code=400,
             detail='Закрытый проект нельзя редактировать'
         )
-    return charity_project
 
 
 async def check_full_amount_update(
@@ -56,7 +56,6 @@ async def check_full_amount_update(
                 status_code=400,
                 detail='Нельзя установить требуемую сумму меньше вложенной'
             )
-    return charity_project
 
 
 async def check_charity_invested_delete(
@@ -71,4 +70,3 @@ async def check_charity_invested_delete(
             status_code=400,
             detail='Нельзя удалить проект, в который вложены средства'
         )
-    return charity_project

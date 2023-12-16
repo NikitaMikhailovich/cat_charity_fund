@@ -1,4 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Text, Integer
+from sqlalchemy import Column, ForeignKey, Integer, Text
+
 from app.models.basemodel_charity import BaseModelCharity
 
 

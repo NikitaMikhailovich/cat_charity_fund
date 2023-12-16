@@ -7,12 +7,10 @@ from logging.config import fileConfig
 # из библиотеки python-dotenv. Эта библиотека была установлена
 # вместе с uvicorn.
 from dotenv import load_dotenv
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+from sqlalchemy import engine_from_config, pool
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from alembic import context
-
 # Импортируем базовый класс Base.
 from app.core.base import Base
 
