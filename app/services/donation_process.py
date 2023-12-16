@@ -36,9 +36,10 @@ async def donation_process(
             if obj.full_amount == obj.invested_amount:
                 await close_fully_invested_object(obj)
 
-            if not available_amount:
+            if available_amount == 0:
                 await close_fully_invested_object(obj_in)
                 break
+
         await session.commit()
     return obj_in
 

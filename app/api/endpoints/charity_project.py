@@ -48,23 +48,22 @@ async def create_new_charity_project(
 @router.patch(
     '/{project_id}',
     response_model=CharityProjectDB,
-    response_model_exclude_none=True,
     dependencies=[Depends(current_superuser)],
 )
 async def partially_update_charity_project(
-        charity_id: int,
+        project_id: int,
         obj_in: CharityProjectUpdate,
         session: AsyncSession = Depends(get_async_session),
 ):
 
     charity_project = await check_charity_project_exists(
-        charity_id, session
+        project_id, session
     )
 
     if obj_in.name is not None:
         await check_name_duplicate(obj_in.name, session)
 
-    await check_charity_closed_before_update(charity_id, session)
+    await check_charity_closed_before_update(project_id, session)
     await check_full_amount_update(charity_project, obj_in.full_amount)
     charity_project = await charity_crud.update(
         charity_project, obj_in, session
@@ -78,13 +77,13 @@ async def partially_update_charity_project(
     dependencies=[Depends(current_superuser)],
 )
 async def remove_charity_project(
-        charity_id: int,
+        project_id: int,
         session: AsyncSession = Depends(get_async_session),
 ):
 
     charity_project = await check_charity_project_exists(
-        charity_id, session
+        project_id, session
     )
-    await check_charity_invested_delete(charity_id, session)
+    await check_charity_invested_delete(project_id, session)
     charity_project = await charity_crud.remove(charity_project, session)
     return charity_project

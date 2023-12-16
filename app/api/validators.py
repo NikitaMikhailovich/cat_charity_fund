@@ -42,7 +42,7 @@ async def check_charity_closed_before_update(
     if charity_project.fully_invested is True:
         raise HTTPException(
             status_code=400,
-            detail='Закрытый проект нельзя редактировать'
+            detail='Закрытый проект нельзя редактировать!'
         )
 
 
@@ -68,5 +68,5 @@ async def check_charity_invested_delete(
     if charity_project.invested_amount > 0:
         raise HTTPException(
             status_code=400,
-            detail='Нельзя удалить проект, в который вложены средства'
+            detail='В проект были внесены средства, не подлежит удалению!'
         )
