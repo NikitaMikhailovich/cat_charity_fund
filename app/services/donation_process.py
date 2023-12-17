@@ -20,27 +20,50 @@ async def donation_process(
         model_in_process, session
     )
     available_amount = obj_in.full_amount
-    if available_objects:
-        for obj in available_objects:
-            need_amount = obj.full_amount - obj.invested_amount
+    # if available_objects:
+    #     for obj in available_objects:
+    #         need_amount = obj.full_amount - obj.invested_amount
 
-            if need_amount < available_amount:
-                invest = need_amount
-            else:
-                invest = available_amount
+    #         if need_amount < available_amount:
+    #             invest = need_amount
+    #         else:
+    #             invest = available_amount
 
-            obj_in.invested_amount += invest
-            available_amount -= invest
-            obj.invested_amount += invest
+    #         obj_in.invested_amount += invest
+    #         available_amount -= invest
+    #         obj.invested_amount += invest
 
-            if obj.full_amount == obj.invested_amount:
-                await close_fully_invested_object(obj)
+    #         if obj.full_amount == obj.invested_amount:
+    #             await close_fully_invested_object(obj)
 
-            if available_amount == 0:
-                await close_fully_invested_object(obj_in)
-                break
+    #         if available_amount == 0:
+    #             await close_fully_invested_object(obj_in)
+    #             break
 
-        await session.commit()
+    #     await session.commit()
+    # return obj_in
+    if not available_objects:
+        return obj_in
+    for obj in available_objects:
+        need_amount = obj.full_amount - obj.invested_amount
+
+        if need_amount < available_amount:
+            invest = need_amount
+        else:
+            invest = available_amount
+
+        obj_in.invested_amount += invest
+        available_amount -= invest
+        obj.invested_amount += invest
+
+        if obj.full_amount == obj.invested_amount:
+            await close_fully_invested_object(obj)
+
+        if available_amount == 0:
+            await close_fully_invested_object(obj_in)
+            break
+
+    await session.commit()
     return obj_in
 
 

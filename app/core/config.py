@@ -3,7 +3,7 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     app_title: str = 'Благотворительный фонд'
-    database_url: str = 'sqlite+aiosqlite:///./fastapi.db'
+    database_url: str = 'sqlite+aiosqlite:///./cat_charity_fund.db'
     secret: str = 'SECRET'
 
     class Config:
