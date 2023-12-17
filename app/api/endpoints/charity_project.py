@@ -23,7 +23,6 @@ router = APIRouter()
 async def get_all_charity_project(
     session: AsyncSession = Depends(get_async_session),
 ):
-    # all_projects = await charity_crud.get_multi(session)
     return await charity_crud.get_multi(session)
 
 
